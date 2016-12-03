@@ -25,6 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".mainScreen"
+            android:label="CSD Plant Damage Camera" >
+
+        </activity>
     </application>
 
 </manifest>
