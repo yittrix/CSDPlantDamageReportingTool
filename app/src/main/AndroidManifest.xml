@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mainScreen"
+            android:name=".CSDCamera"
             android:label="CSD Plant Damage Camera" >
 
         </activity>
