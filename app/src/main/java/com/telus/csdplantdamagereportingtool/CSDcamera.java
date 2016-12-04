@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.KeyEventCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -22,6 +23,9 @@ public class CSDCamera extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+    private static final int CAMERA_PIC_REQUEST = 1234;
+
+    private static final String TAG = CSDCamera.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,8 +195,19 @@ public class CSDCamera extends AppCompatActivity {
 */
 
     private void openCamera() {
+
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+        //startActivity(intent);
+        startActivityForResult(intent, CAMERA_PIC_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+            String result = data.toURI();
+            Log.d(TAG, "Test " + result);
+
+        }
     }
 
     public void takePhoto (View view) {
