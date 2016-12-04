@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature android:name="android.hardware.camera2" android:required="true"/>
 
@@ -27,7 +29,15 @@
         </activity>
         <activity
             android:name=".CSDCamera"
-            android:label="CSD Plant Damage Camera" >
+            android:label="CSD Plant Damage Camera"
+            android:parentActivityName="com.telus.csdplantdamagereportingtool.mainScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.telus.csdplantdamagereportingtool.mainScreen" />
+        </activity>
+        <activity
+            android:name=".mainScreen"
+            android:label="Main Screen" >
 
         </activity>
     </application>

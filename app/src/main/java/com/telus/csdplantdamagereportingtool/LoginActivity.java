@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                // Login Correct then load camera interface
                 Intent myIntent = new Intent(view.getContext(), CSDCamera.class);
                 startActivityForResult(myIntent, 0);
             }
