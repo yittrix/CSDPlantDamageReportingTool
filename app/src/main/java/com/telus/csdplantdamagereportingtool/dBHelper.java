@@ -32,12 +32,12 @@ public class dBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME +
                 " (" +
-                COL_1 + "INT PRIMARY KEY AUTOINCREMENT, " +
+                COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_2 + "TEXT ," +
                 COL_3 + "DATETIME, " +
-                COL_4 + "INT, " +
-                COL_5 + "INT, " +
-                COL_6 + "INT, " +
+                COL_4 + "INTEGER, " +
+                COL_5 + "INTEGER, " +
+                COL_6 + "INTEGER, " +
                 COL_7 + "FLOAT, " +
                 COL_8 + "FLOAT, " +
                 COL_9 + "TEXT, " +
