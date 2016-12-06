@@ -8,8 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,12 +23,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
 
 public class CSDCamera extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-    private static final int CAMERA_PIC_REQUEST = 1234;
+    private static final int CAMERA_PIC_REQUEST = 1337;
 
     private static final String TAG = CSDCamera.class.getSimpleName();
 
@@ -198,17 +207,32 @@ public class CSDCamera extends AppCompatActivity {
 
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         //startActivity(intent);
-        startActivityForResult(intent, CAMERA_PIC_REQUEST);
+        startActivityForResult(intent, 0);
     }
 
+    // Get URI and Path Information
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == 0) {
-            String result = data.toURI();
+            Uri result = data.getData();
             Log.d(TAG, "Test " + result);
-
+            String path = getRealPathFromURI(result);
+            Log.d(TAG, "File "  + path);
         }
     }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+    // Get GPS info
+
+
+
 
     public void takePhoto (View view) {
         Intent myIntent = new Intent(view.getContext(), CSDCamera.class);
